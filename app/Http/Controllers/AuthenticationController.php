@@ -2,40 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
 {
-    use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-    protected function validator(Request $request)
-    {
-        return Validator::make($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
     /**
      * Display a listing of the resource.
      *
@@ -64,13 +35,22 @@ class AuthenticationController extends Controller
      */
     public function store(Request $request)
     {
-        $input = $request->all();
-        $company_type = implode(",", $input['company_type']).',';
-        return User::create([
-            'name' => $input['name'],
-            'email' => $input['email'],
-            'password' => Hash::make($input['password']),
+        $validate = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:50'],
+            'gender' => ['required'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:4'],
+            'company' => ['required', 'string'],
+            'location' => ['required', 'string'],
+            'accept_term' => ['required'],
         ]);
+        $input = $request->all();
+        if ($validate->fails())
+        {
+            return redirect()->back()->withErrors($validate->errors());
+        }else{
+            return $input;
+        }
     }
 
     /**

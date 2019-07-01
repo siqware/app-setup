@@ -42,7 +42,6 @@
 </head>
 
 <body class="bg-slate-800">
-
 <!-- Page content -->
 <div class="page-content">
 
@@ -157,16 +156,22 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group form-group-feedback form-group-feedback-right">
-                                        <input type="text" class="form-control" name="name" placeholder="Name" required>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Name" required>
                                         <div class="form-control-feedback">
                                             <i class="icon-user-check text-muted"></i>
                                         </div>
+                                        @error('name')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group form-group-feedback form-group-feedback-right">
-                                        <select data-placeholder="Gender" name="gender" class="form-control select" required data-fouc>
+                                        <select data-placeholder="Gender" name="gender" class="form-control @error('gender') is-invalid @enderror select"
+                                                required data-fouc>
                                             <option></option>
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
@@ -174,6 +179,11 @@
                                         <div class="form-control-feedback">
                                             <i class="fas fa-transgender text-muted"></i>
                                         </div>
+                                        @error('gender')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -183,26 +193,23 @@
                                 <div class="form-control-feedback">
                                     <i class="icon-mail5 text-muted"></i>
                                 </div>
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group form-group-feedback form-group-feedback-right">
-                                        <input type="password" class="form-control" name="password" placeholder="Your password" required>
-                                        <div class="form-control-feedback">
-                                            <i class="icon-lock2 text-muted"></i>
-                                        </div>
-                                    </div>
+                            <div class="form-group form-group-feedback form-group-feedback-right">
+                                <input type="password" class="form-control" name="password" placeholder="Your password" required>
+                                <div class="form-control-feedback">
+                                    <i class="icon-lock2 text-muted"></i>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group form-group-feedback form-group-feedback-right">
-                                        <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm password" required>
-                                        <div class="form-control-feedback">
-                                            <i class="icon-lock2 text-muted"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group text-center text-muted content-divider">
@@ -210,14 +217,22 @@
                             </div>
 
                             <div class="form-group form-group-feedback form-group-feedback-right">
-                                <input type="text" class="form-control" name="company" placeholder="Company's name" required>
+                                <input type="text" class="form-control @error('company') is-invalid @enderror" name="company" placeholder="Company's name"
+                                       required>
                                 <div class="form-control-feedback">
                                     <i class="icon-home text-muted"></i>
                                 </div>
+                                @error('company')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-group form-group-feedback form-group-feedback-right">
-                                <select required data-placeholder="Organization Type" name="company_type[]" class="form-control select select-multiple-tokenization" multiple="multiple" data-fouc>
+                                <select required data-placeholder="Organization Type" name="company_type[]"
+                                        class="form-control select select-multiple-tokenization" multiple="multiple"
+                                        data-fouc>
                                     <option></option>
                                     <option value="CO">Organization</option>
                                     <option value="ID">Shopping</option>
@@ -229,17 +244,29 @@
                             </div>
 
                             <div class="form-group form-group-feedback form-group-feedback-right">
-                                <input type="text" class="form-control" name="location" placeholder="Company's Location" required>
+                                <input type="text" class="form-control @error('location') is-invalid @enderror" name="location" placeholder="Company's Location"
+                                       required>
                                 <div class="form-control-feedback">
                                     <i class="icon-map text-muted"></i>
                                 </div>
+                                @error('location')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="form-check">
                                     <label class="form-check-label">
-                                        <input type="checkbox" name="accept_term" class="form-input-styled" data-fouc required>
+                                        <input type="checkbox" name="accept_term" class="form-input-styled" data-fouc
+                                               required>
                                         Accept <a href="#">terms of service</a>
                                     </label>
+                                    @error('accept_term')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
